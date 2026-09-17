@@ -105,8 +105,21 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,12,16,.92);backdrop-fil
 .prod-wa:hover{opacity:.88}
 .prod-wa svg{width:13px;height:13px}
 
+/* ─── INFO COMPRA (PAGOS Y ENVÍOS) ────────────────────────── */
+.info-section{background:var(--bg2)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.info-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;transition:border-color .2s}
+.info-card:hover{border-color:rgba(0,212,170,.3)}
+.info-header{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.info-icon{width:48px;height:48px;background:rgba(0,212,170,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--cyan)}
+.info-icon svg{width:24px;height:24px}
+.info-card h3{font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--white)}
+.info-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.info-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted)}
+.info-item svg{width:16px;height:16px;color:var(--cyan);flex-shrink:0}
+
 /* ─── FORMULARIO CONTACTO / CRM ───────────────────────────── */
-.contact-section{background:var(--bg2)}
+.contact-section{background:var(--bg)}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
 .contact-info h2{font-family:var(--font-head);font-size:30px;font-weight:800;line-height:1.2;margin-bottom:16px}
 .contact-info h2 em{font-style:normal;color:var(--cyan)}
@@ -159,7 +172,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0 2
 
 /* ─── RESPONSIVE ──────────────────────────────────────────── */
 @media(max-width:900px){
-  .hero-grid,.contact-grid{grid-template-columns:1fr}
+  .hero-grid,.contact-grid,.info-grid{grid-template-columns:1fr}
   .hero-visual{display:none}
   .form-row{grid-template-columns:1fr}
 }
@@ -185,6 +198,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0 2
     </a>
     <ul class="nav-links">
       <li><a href="#productos">Catálogo</a></li>
+      <li><a href="#compra">Cómo comprar</a></li>
       <li><a href="#contacto">Consultar</a></li>
     </ul>
     <a href="https://wa.me/541140351402?text=Hola%20Distritecno%2C%20quiero%20consultar%20sobre%20una%20fragancia" target="_blank" class="nav-wa">
@@ -243,6 +257,46 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0 2
       <span class="prod-count" id="prodCount"></span>
     </div>
     <div class="products-grid" id="productsGrid"></div>
+  </div>
+</section>
+
+<!-- INFO COMPRA -->
+<section id="compra" class="info-section">
+  <div class="container">
+    <div class="section-head" style="justify-content: center; text-align: center; flex-direction: column;">
+      <h2>Compra fácil y seguro</h2>
+      <p style="color: var(--muted); max-width: 600px; margin: 0 auto;">Te contamos cómo adquirir tus fragancias favoritas y recibirlas en la puerta de tu casa.</p>
+    </div>
+    <div class="info-grid">
+      <!-- ENVÍOS -->
+      <div class="info-card">
+        <div class="info-header">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 20 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+          </div>
+          <h3>Envíos y Entregas</h3>
+        </div>
+        <ul class="info-list">
+          <li class="info-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Envíos a todo el país por Correo Argentino.</li>
+          <li class="info-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Entregas rápidas en CABA y GBA mediante mensajería.</li>
+          <li class="info-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Opción de retiro en persona coordinando previamente.</li>
+        </ul>
+      </div>
+      <!-- PAGOS -->
+      <div class="info-card">
+        <div class="info-header">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+          </div>
+          <h3>Métodos de Pago</h3>
+        </div>
+        <ul class="info-list">
+          <li class="info-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Mercado Pago (Crédito, Débito).</li>
+          <li class="info-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Transferencia Bancaria.</li>
+          <li class="info-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Efectivo al retirar el producto.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
