@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Distritecno — Electrónica y Tecnología | Buenos Aires</title>
+<meta name="description" content="Electrónica, celulares, computación y electro al mejor precio en Buenos Aires. Consultá por WhatsApp.">
+<meta property="og:title" content="Distritecno — Electrónica y Tecnología">
+<meta property="og:description" content="Celulares, computación, TV, audio y electro. Consultá sin compromiso.">
+<meta property="og:image" content="images/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ──────────────────────────────────────────────── */
+:root {
+  --bg:        #0a0c10;
+  --bg2:       #111520;
+  --bg3:       #181d28;
+  --surface:   #1c2231;
+  --border:    rgba(255,255,255,.07);
+  --cyan:      #00d4aa;
+  --cyan-dim:  #00a884;
+  --amber:     #f5a623;
+  --white:     #f0f2f7;
+  --muted:     #7a8394;
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --radius:    10px;
+  --wa:        #25d366;
+}
+
+/* ─── RESET ───────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:var(--font-body);font-size:16px;line-height:1.6;min-height:100vh}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+input,textarea,select{font-family:inherit}
+
+/* ─── LAYOUT ──────────────────────────────────────────────── */
+.container{max-width:1160px;margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+
+/* ─── NAV ─────────────────────────────────────────────────── */
+nav{position:sticky;top:0;z-index:100;background:rgba(10,12,16,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1160px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:34px;height:34px;background:var(--cyan);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.logo-mark svg{width:20px;height:20px;fill:var(--bg)}
+.logo-name{font-family:var(--font-head);font-weight:800;font-size:18px;letter-spacing:.3px;color:var(--white)}
+.logo-name span{color:var(--cyan)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:13.5px;font-weight:500;color:var(--muted);transition:color .15s}
+.nav-links a:hover{color:var(--white)}
+.nav-wa{background:var(--wa);color:#fff;font-size:13px;font-weight:600;padding:7px 16px;border-radius:20px;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.nav-wa:hover{opacity:.9}
+
+/* ─── HERO ────────────────────────────────────────────────── */
+.hero{padding:80px 0 64px;border-bottom:1px solid var(--border)}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--cyan);border:1px solid rgba(0,212,170,.25);padding:4px 12px;border-radius:20px;margin-bottom:20px}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0}
+.hero h1{font-family:var(--font-head);font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.1;color:var(--white);margin-bottom:18px}
+.hero h1 em{font-style:normal;color:var(--cyan)}
+.hero p{font-size:16px;color:var(--muted);max-width:440px;margin-bottom:32px;line-height:1.7}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:var(--cyan);color:var(--bg);font-weight:700;font-size:14px;padding:12px 24px;border-radius:var(--radius);transition:opacity .15s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{opacity:.88}
+.btn-ghost{border:1px solid var(--border);color:var(--white);font-size:14px;font-weight:500;padding:12px 24px;border-radius:var(--radius);transition:border-color .15s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.25)}
+.hero-stats{display:flex;gap:32px;margin-top:40px;padding-top:32px;border-top:1px solid var(--border)}
+.stat-val{font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--white)}
+.stat-val span{color:var(--cyan)}
+.stat-lab{font-size:12px;color:var(--muted)}
+.hero-visual{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.hero-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;width:calc(50% - 5px)}
+.hero-card img{width:100%;height:110px;object-fit:cover}
+.hero-card-label{padding:8px 10px;font-size:12px;font-weight:500;color:var(--muted)}
+
+/* ─── CATEGORÍAS ──────────────────────────────────────────── */
+.cats{padding:40px 0;border-bottom:1px solid var(--border)}
+.cat-bar{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.cat-bar::-webkit-scrollbar{display:none}
+.cat-btn{flex-shrink:0;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:13px;font-weight:500;padding:8px 18px;border-radius:20px;transition:.15s;cursor:pointer}
+.cat-btn:hover,.cat-btn.active{background:var(--cyan);border-color:var(--cyan);color:var(--bg)}
+
+/* ─── PRODUCTOS ───────────────────────────────────────────── */
+.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px;gap:16px}
+.section-head h2{font-family:var(--font-head);font-size:24px;font-weight:700}
+.prod-count{font-size:13px;color:var(--muted)}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.prod-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .15s,transform .15s}
+.prod-card:hover{border-color:rgba(0,212,170,.3);transform:translateY(-2px)}
+.prod-img{position:relative;height:170px;overflow:hidden;background:var(--bg2)}
+.prod-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.prod-card:hover .prod-img img{transform:scale(1.04)}
+.prod-cat{position:absolute;top:10px;left:10px;background:rgba(10,12,16,.7);backdrop-filter:blur(6px);font-size:10px;font-weight:600;color:var(--cyan);padding:3px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.4px}
+.prod-body{padding:14px 16px 16px}
+.prod-name{font-family:var(--font-head);font-size:14.5px;font-weight:700;line-height:1.3;margin-bottom:4px;color:var(--white)}
+.prod-desc{font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.prod-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.prod-price{font-family:var(--font-head);font-size:13px;font-weight:700;color:var(--amber)}
+.prod-wa{background:var(--wa);color:#fff;font-size:12px;font-weight:600;padding:7px 14px;border-radius:8px;display:flex;align-items:center;gap:5px;transition:opacity .15s;white-space:nowrap}
+.prod-wa:hover{opacity:.88}
+.prod-wa svg{width:13px;height:13px}
+
+/* ─── FORMULARIO CONTACTO / CRM ───────────────────────────── */
+.contact-section{background:var(--bg2)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.contact-info h2{font-family:var(--font-head);font-size:30px;font-weight:800;line-height:1.2;margin-bottom:16px}
+.contact-info h2 em{font-style:normal;color:var(--cyan)}
+.contact-info p{color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:28px}
+.contact-items{display:flex;flex-direction:column;gap:16px}
+.c-item{display:flex;align-items:flex-start;gap:12px}
+.c-icon{width:36px;height:36px;background:rgba(0,212,170,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--cyan)}
+.c-icon svg{width:16px;height:16px}
+.c-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.c-val{font-size:14px;font-weight:500;color:var(--white)}
+
+/* Form */
+.form-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px}
+.form-card h3{font-family:var(--font-head);font-size:18px;font-weight:700;margin-bottom:20px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px;letter-spacing:.3px}
+.field input,.field select,.field textarea{
+  width:100%;background:var(--bg3);border:1px solid var(--border);
+  border-radius:8px;color:var(--white);font-size:14px;padding:10px 14px;
+  transition:border-color .15s;outline:none
+}
+.field input:focus,.field select,.field textarea:focus{border-color:rgba(0,212,170,.4)}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a8394' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.field select option{background:var(--bg3)}
+.field textarea{resize:vertical;min-height:80px}
+.submit-btn{width:100%;background:var(--cyan);color:var(--bg);font-weight:700;font-size:15px;padding:14px;border-radius:10px;margin-top:4px;transition:opacity .15s;display:flex;align-items:center;justify-content:center;gap:8px}
+.submit-btn:hover{opacity:.88}
+.submit-btn:disabled{opacity:.5;cursor:not-allowed}
+.form-msg{margin-top:12px;font-size:13px;text-align:center;padding:10px;border-radius:8px;display:none}
+.form-msg.ok{background:rgba(0,212,170,.12);color:var(--cyan)}
+.form-msg.err{background:rgba(255,80,80,.1);color:#ff6b6b}
+
+/* ─── FOOTER ──────────────────────────────────────────────── */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0 24px}
+.footer-inner{display:flex;align-items:flex-start;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-bottom:32px}
+.footer-brand p{font-size:13px;color:var(--muted);margin-top:8px;max-width:280px;line-height:1.6}
+.footer-links h4{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+.footer-links ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-links li a{font-size:13px;color:var(--muted);transition:color .15s}
+.footer-links li a:hover{color:var(--white)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:12px;color:var(--muted)}
+.footer-bottom a{color:var(--cyan)}
+
+/* ─── WA FLOTANTE ─────────────────────────────────────────── */
+.wa-float{position:fixed;bottom:24px;right:24px;z-index:200;background:var(--wa);width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:transform .2s}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:26px;height:26px;fill:#fff}
+
+/* ─── RESPONSIVE ──────────────────────────────────────────── */
+@media(max-width:900px){
+  .hero-grid,.contact-grid{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .form-row{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  section{padding:48px 0}
+  .nav-links{display:none}
+  .hero h1{font-size:30px}
+  .hero-stats{gap:20px}
+  .footer-inner{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 20 20"><path d="M3 10l4-4 3 3 4-6 3 3"/><circle cx="17" cy="10" r="2.5"/></svg>
+      </div>
+      <span class="logo-name">Distri<span>tecno</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#contacto">Consultar</a></li>
+    </ul>
+    <a href="https://wa.me/541140351402?text=Hola%20Distritecno%2C%20quiero%20consultar%20sobre%20un%20producto" target="_blank" class="nav-wa">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.505 3.585 1.385 5.07L2 22l5.073-1.368A9.962 9.962 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag">Buenos Aires, Argentina</div>
+        <h1>Tecnología al<br><em>mejor precio</em></h1>
+        <p>Celulares, computación, TV, audio y electro. Consultá sin compromiso, respondemos por WhatsApp.</p>
+        <div class="hero-actions">
+          <a href="#productos" class="btn-primary">Ver catálogo</a>
+          <a href="#contacto" class="btn-ghost">Hacer consulta</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-val">17<span>+</span></div>
+            <div class="stat-lab">Productos</div>
+          </div>
+          <div>
+            <div class="stat-val"><span>$</span>$$</div>
+            <div class="stat-lab">Precios justos</div>
+          </div>
+          <div>
+            <div class="stat-val">24<span>hs</span></div>
+            <div class="stat-lab">Respuesta</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual" id="heroVisual"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTRO CATEGORÍAS -->
+<section class="cats">
+  <div class="container">
+    <div class="cat-bar" id="catBar">
+      <button class="cat-btn active" data-cat="Todos">Todos</button>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+  <div class="container">
+    <div class="section-head">
+      <h2>Catálogo</h2>
+      <span class="prod-count" id="prodCount"></span>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+</section>
+
+<!-- CONTACTO / CRM -->
+<section id="contacto" class="contact-section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Consultá<br><em>sin compromiso</em></h2>
+        <p>Dejanos tus datos y te contactamos por WhatsApp. También podés escribirnos directamente si preferís.</p>
+        <div class="contact-items">
+          <div class="c-item">
+            <div class="c-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.21 6.21l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+            </div>
+            <div>
+              <div class="c-label">WhatsApp</div>
+              <div class="c-val">+54 11 4035-1402</div>
+            </div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="c-label">Zona</div>
+              <div class="c-val">Buenos Aires, Argentina</div>
+            </div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="c-label">Respuesta</div>
+              <div class="c-val">En el día, por WhatsApp</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3>¿Qué estás buscando?</h3>
+        <form id="crmForm">
+          <div class="form-row">
+            <div class="field">
+              <label>Tu nombre *</label>
+              <input type="text" id="f-nombre" placeholder="Juan Pérez" required>
+            </div>
+            <div class="field">
+              <label>WhatsApp / Teléfono</label>
+              <input type="text" id="f-tel" placeholder="+549 11 XXXX-XXXX">
+            </div>
+          </div>
+          <div class="field">
+            <label>¿Qué producto te interesa?</label>
+            <input type="text" id="f-interes" placeholder="Ej: Samsung A55, smart TV, lavarropas...">
+          </div>
+          <div class="field">
+            <label>¿Cómo nos encontraste?</label>
+            <select id="f-canal">
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Telegram">Telegram</option>
+              <option value="Web">Página web</option>
+              <option value="Referido">Me lo recomendaron</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Mensaje (opcional)</label>
+            <textarea id="f-notas" placeholder="Contanos más sobre lo que buscás: cantidad, presupuesto, etc."></textarea>
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Enviar consulta
+          </button>
+          <div class="form-msg" id="formMsg"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo" style="margin-bottom:10px;display:inline-flex">
+          <div class="logo-mark"><svg viewBox="0 0 20 20" fill="var(--bg)"><path d="M3 10l4-4 3 3 4-6 3 3"/><circle cx="17" cy="10" r="2.5"/></svg></div>
+          <span class="logo-name" style="margin-left:8px">Distri<span>tecno</span></span>
+        </a>
+        <p>Electrónica y tecnología en Buenos Aires. Consultá por WhatsApp, respondemos rápido.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Categorías</h4>
+        <ul id="footerCats"></ul>
+      </div>
+      <div class="footer-links">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="https://wa.me/541140351402" target="_blank">WhatsApp</a></li>
+          <li><a href="#contacto">Formulario</a></li>
+          <li><a href="#productos">Ver catálogo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Distritecno — Buenos Aires, Argentina</p>
+      <p>Sitio web gratuito · <a href="#contacto">Hacer consulta</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- WA FLOTANTE -->
+<a href="https://wa.me/541140351402?text=Hola%20Distritecno%2C%20vi%20su%20p%C3%A1gina%20y%20quiero%20consultar" target="_blank" class="wa-float" title="Escribinos por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.505 3.585 1.385 5.07L2 22l5.073-1.368A9.962 9.962 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+</a>
+
+<script>
+// ─── CATÁLOGO ─────────────────────────────────────────────
+const WA = '541140351402';
+
+const productos = [
+  { id:1, nombre:'Samsung Galaxy A16', cat:'Celulares', desc:'Android 14, batería 5000 mAh, cámara 50 MP', img:'images/samsung-a16.jpg' },
+  { id:2, nombre:'Samsung Galaxy A07', cat:'Celulares', desc:'Pantalla 6.5" FHD+, cámara triple, 4 GB RAM', img:'images/samsung-a07.jpg' },
+  { id:3, nombre:'HP Laptop 15 fc0043la', cat:'Computación', desc:'AMD Ryzen 5, 8 GB RAM, 512 GB SSD, Win 11', img:'images/hp-laptop.jpg' },
+  { id:4, nombre:'Samsung Smart TV 55" 4K', cat:'TV', desc:'UHD, HDR, HDMI x3, acceso a streaming', img:'images/samsung-tv-55.jpg' },
+  { id:5, nombre:'Parlante Neon 25 Telefunken', cat:'Audio', desc:'25W, luz LED, Bluetooth 5.0, micrófono', img:'images/parlante-neon.jpg' },
+  { id:6, nombre:'Noga Watch NG-SW26', cat:'Wearables', desc:'Smartwatch, pulsómetro, GPS integrado', img:'images/noga-watch.jpg' },
+  { id:7, nombre:'Game Stick Pro + Joystick', cat:'Gaming', desc:'Joystick inalámbrico 2.4G + consola portátil', img:'images/game-stick.jpg' },
+  { id:8, nombre:'Tostadora 4 Rebanadas', cat:'Electro', desc:'Novohome, bandeja recoge-migas extraíble', img:'images/tostadora.jpg' },
+  { id:9, nombre:'Pava Eléctrica XL', cat:'Electro', desc:'Novohome, 1,7 litros, apagado automático', img:'images/pava-electrica.jpg' },
+  { id:10, nombre:'Horno Eléctrico Black 52L', cat:'Electro', desc:'Lüsqtoff, convección, grill, 2000W', img:'images/horno-lusqtoff.jpg' },
+  { id:11, nombre:'Sartén Eléctrica c/ Tapa', cat:'Electro', desc:'Dinax, antiadherente, control de temperatura', img:'images/sarten-electrica.jpg' },
+  { id:12, nombre:'Lavarropas Carga Superior 4kg', cat:'Electro', desc:'Tambor acero inox, múltiples programas', img:'images/lavarropas.jpg' },
+  { id:13, nombre:'Secarropas de Pared 8kg', cat:'Electro', desc:'Wanke, fijación a pared, silencioso', img:'images/secarropas.jpg' },
+  { id:14, nombre:'Calefactor Exterior G2250AR', cat:'Electro', desc:'Gamma, Gas GN/GLP, uso exterior/interior', img:'images/calefactor-gamma.jpg' },
+  { id:15, nombre:'Máscara Fotosensible LSM1S', cat:'Herramientas', desc:'Omaha, oscurecimiento automático, DIN 9-13', img:'images/mascara-omaha.jpg' },
+  { id:16, nombre:'Soldadora Inverter SMITH-120', cat:'Herramientas', desc:'Electrodos 1.6-3.2mm, 20-120A, portátil', img:'images/soldadora-smith.jpg' },
+  { id:17, nombre:'Bicicleta Rodado 29 Gravity', cat:'Bicicletas', desc:'Mountain bike, frenos a disco, 21 velocidades', img:'images/bicicleta-gravity.jpg' },
+];
+
+// Categorías únicas
+const cats = ['Todos', ...new Set(productos.map(p => p.cat))];
+
+// Render categorías
+const catBar = document.getElementById('catBar');
+cats.forEach(cat => {
+  if (cat === 'Todos') return; // ya existe
+  const btn = document.createElement('button');
+  btn.className = 'cat-btn';
+  btn.dataset.cat = cat;
+  btn.textContent = cat;
+  catBar.appendChild(btn);
+});
+
+// Footer cats
+const footerCats = document.getElementById('footerCats');
+cats.filter(c => c !== 'Todos').forEach(cat => {
+  const li = document.createElement('li');
+  li.innerHTML = `<a href="#productos">${cat}</a>`;
+  footerCats.appendChild(li);
+});
+
+// Hero cards (primeros 4)
+const heroVisual = document.getElementById('heroVisual');
+productos.slice(0,4).forEach(p => {
+  heroVisual.innerHTML += `<div class="hero-card">
+    <img src="${p.img}" alt="${p.nombre}" onerror="this.style.display='none'">
+    <div class="hero-card-label">${p.nombre}</div>
+  </div>`;
+});
+
+// Render productos
+let activeCat = 'Todos';
+
+function waUrl(prod) {
+  const msg = encodeURIComponent(`Hola Distritecno 👋 Quiero consultar por el *${prod.nombre}*. ¿Cuál es el precio y disponibilidad?`);
+  return `https://wa.me/${WA}?text=${msg}`;
+}
+
+function renderProds() {
+  const grid = document.getElementById('productsGrid');
+  const count = document.getElementById('prodCount');
+  const filtered = activeCat === 'Todos' ? productos : productos.filter(p => p.cat === activeCat);
+  count.textContent = `${filtered.length} producto${filtered.length !== 1 ? 's' : ''}`;
+  grid.innerHTML = filtered.map(p => `
+    <div class="prod-card">
+      <div class="prod-img">
+        <img src="${p.img}" alt="${p.nombre}" loading="lazy" onerror="this.parentElement.style.background='#1c2231'">
+        <span class="prod-cat">${p.cat}</span>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">${p.nombre}</div>
+        <div class="prod-desc">${p.desc}</div>
+        <div class="prod-footer">
+          <span class="prod-price">Consultar precio</span>
+          <a href="${waUrl(p)}" target="_blank" class="prod-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.505 3.585 1.385 5.07L2 22l5.073-1.368A9.962 9.962 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+            Consultar
+          </a>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// Filtro
+catBar.addEventListener('click', e => {
+  const btn = e.target.closest('.cat-btn');
+  if (!btn) return;
+  catBar.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeCat = btn.dataset.cat;
+  renderProds();
+});
+
+renderProds();
+
+// ─── FORMULARIO → CRM (n8n webhook) ───────────────────────
+// 👉 Reemplazá esta URL por tu webhook de n8n
+const WEBHOOK_URL = 'https://neom27542622.app.n8n.cloud/webhook/crm-contacto';
+
+document.getElementById('crmForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const msg = document.getElementById('formMsg');
+  const nombre = document.getElementById('f-nombre').value.trim();
+  const tel    = document.getElementById('f-tel').value.trim();
+  const interes= document.getElementById('f-interes').value.trim();
+  const canal  = document.getElementById('f-canal').value;
+  const notas  = document.getElementById('f-notas').value.trim();
+
+  if (!nombre) { alert('Por favor ingresá tu nombre.'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+  msg.style.display = 'none';
+
+  try {
+    const resp = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, tel, interes, canal, notas, status: 'lead' })
+    });
+
+    if (resp.ok) {
+      msg.textContent = '✓ ¡Recibimos tu consulta! Te contactamos por WhatsApp a la brevedad.';
+      msg.className = 'form-msg ok';
+      msg.style.display = 'block';
+      e.target.reset();
+      // También abrimos WhatsApp como respaldo
+      const waMsg = encodeURIComponent(`Hola Distritecno, acabo de completar el formulario del sitio. Mi nombre es ${nombre}${interes ? ` y estoy buscando: ${interes}` : ''}.`);
+      setTimeout(() => { window.open(`https://wa.me/${WA}?text=${waMsg}`, '_blank'); }, 800);
+    } else {
+      throw new Error('Error del servidor');
+    }
+  } catch (err) {
+    // Si el webhook no está activo, de todas formas abrimos WhatsApp
+    msg.textContent = 'Redirigiendo a WhatsApp para completar tu consulta...';
+    msg.className = 'form-msg ok';
+    msg.style.display = 'block';
+    const waMsg = encodeURIComponent(`Hola Distritecno, me contacto desde su sitio web. Mi nombre es ${nombre}${interes ? ` y busco: ${interes}` : ''}.`);
+    setTimeout(() => { window.open(`https://wa.me/${WA}?text=${waMsg}`, '_blank'); }, 600);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Enviar consulta';
+  }
+});
+</script>
+</body>
+</html>
