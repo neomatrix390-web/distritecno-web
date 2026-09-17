@@ -5,7 +5,7 @@
 
 # ── CONFIGURACIÓN ────────────────────────────────────────────
 $REPO_NAME   = "distritecno-web"
-$GITHUB_USER = "TU_USUARIO_GITHUB"   # 👈 cambiá esto
+$GITHUB_USER = Read-Host "Ingresá tu usuario de GitHub"
 $BRANCH      = "main"
 # ─────────────────────────────────────────────────────────────
 
@@ -30,7 +30,7 @@ git add .
 
 # 3. Commit inicial
 $fecha = Get-Date -Format "dd/MM/yyyy HH:mm"
-git commit -m "Sitio web Distritecno — $fecha"
+git commit -m "Actualización sitio web Distritecno — $fecha"
 
 # 4. Crear repo en GitHub via API (necesita GitHub CLI o token)
 Write-Host ""
@@ -68,15 +68,13 @@ Write-Host "━━━━━━━━━━━━━━━━━━━━━━�
 Write-Host ""
 Write-Host "  Repo: https://github.com/$GITHUB_USER/$REPO_NAME" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "  PRÓXIMO PASO — Publicar gratis en Cloudflare Pages:" -ForegroundColor White
-Write-Host "  1. Ir a https://pages.cloudflare.com" -ForegroundColor Gray
-Write-Host "  2. Conectar cuenta de GitHub" -ForegroundColor Gray
-Write-Host "  3. Elegir el repo '$REPO_NAME'" -ForegroundColor Gray
-Write-Host "  4. Framework preset: None (sitio estático)" -ForegroundColor Gray
-Write-Host "  5. Build command: (dejar vacío)" -ForegroundColor Gray
-Write-Host "  6. Output directory: / (raíz)" -ForegroundColor Gray
-Write-Host "  7. Deploy — en 2 min tenés URL pública .pages.dev" -ForegroundColor Gray
+Write-Host "  PRÓXIMO PASO — Publicar gratis en GitHub Pages:" -ForegroundColor White
+Write-Host "  1. Entrá a tu repo en GitHub" -ForegroundColor Gray
+Write-Host "  2. Ve a Settings > Pages" -ForegroundColor Gray
+Write-Host "  3. En 'Build and deployment' > 'Source', elegí 'Deploy from a branch'" -ForegroundColor Gray
+Write-Host "  4. Seleccioná la rama 'main' y la carpeta '/ (root)'" -ForegroundColor Gray
+Write-Host "  5. Clic en Save. En 1 min tendrás tu URL pública github.io" -ForegroundColor Gray
 Write-Host ""
 Write-Host "  Para conectar distritecno7.com.ar:" -ForegroundColor White
-Write-Host "  En Cloudflare Pages > tu sitio > Custom domains > Add domain" -ForegroundColor Gray
+Write-Host "  En Settings > Pages > Custom domain, agregá tu dominio" -ForegroundColor Gray
 Write-Host ""
