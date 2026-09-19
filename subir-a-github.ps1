@@ -5,8 +5,22 @@
 
 # ── CONFIGURACIÓN ────────────────────────────────────────────
 $REPO_NAME   = "distritecno-web"
-$GITHUB_USER = Read-Host "Ingresá tu usuario de GitHub"
 $BRANCH      = "main"
+
+# El usuario de GitHub no puede quedar vacío: un ENTER en blanco armaría
+# un remote roto (https://github.com//distritecno-web.git) y el push falla
+$GITHUB_USER = ""
+for ($intento = 1; $intento -le 3 -and -not $GITHUB_USER; $intento++) {
+    $GITHUB_USER = "$(Read-Host 'Ingresá tu usuario de GitHub')".Trim()
+    if (-not $GITHUB_USER) {
+        Write-Host "  ✗ El usuario no puede estar vacío." -ForegroundColor Red
+    }
+}
+if (-not $GITHUB_USER) {
+    Write-Host ""
+    Write-Host "✗ No se ingresó un usuario de GitHub. Cancelando." -ForegroundColor Red
+    exit 1
+}
 # ─────────────────────────────────────────────────────────────
 
 Write-Host ""
