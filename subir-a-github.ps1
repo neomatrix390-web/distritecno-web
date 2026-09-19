@@ -42,38 +42,56 @@ if (-not (Test-Path ".git")) {
 Write-Host "► Agregando archivos..." -ForegroundColor Yellow
 git add .
 
-# 3. Commit inicial
-$fecha = Get-Date -Format "dd/MM/yyyy HH:mm"
-git commit -m "Actualización sitio web Distritecno — $fecha"
+# 3. Commit — solo si hay algo staged, y si falla se corta acá
+git diff --cached --quiet
+$hayCambios = ($LASTEXITCODE -ne 0)
 
-# 4. Crear repo en GitHub via API (necesita GitHub CLI o token)
-Write-Host ""
-Write-Host "► Creando repositorio en GitHub..." -ForegroundColor Yellow
-Write-Host ""
-Write-Host "  Abrí esta URL en tu navegador para crear el repo:" -ForegroundColor White
-Write-Host "  https://github.com/new" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "  Configuración recomendada:" -ForegroundColor White
-Write-Host "  • Repository name: $REPO_NAME" -ForegroundColor Gray
-Write-Host "  • Visibility: Public" -ForegroundColor Gray
-Write-Host "  • NO tildes 'Add README', 'Add .gitignore' ni 'Choose license'" -ForegroundColor Gray
-Write-Host ""
-Read-Host "  Cuando lo hayas creado, presioná ENTER para continuar"
+if ($hayCambios) {
+    $fecha = Get-Date -Format "dd/MM/yyyy HH:mm"
+    git commit -m "Actualización sitio web Distritecno — $fecha"
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host ""
+        Write-Host "✗ El commit falló. Cancelando sin subir nada." -ForegroundColor Red
+        exit 1
+    }
+} else {
+    Write-Host "✓ No hay cambios nuevos para commitear" -ForegroundColor Green
+}
 
-# 5. Conectar con el repo remoto
+# 4. Conectar con el repo remoto
+#    Si origin ya existe, se saltea todo el instructivo de crear el repo
 $REMOTE_URL = "https://github.com/$GITHUB_USER/$REPO_NAME.git"
-Write-Host "► Conectando con GitHub ($REMOTE_URL)..." -ForegroundColor Yellow
-
 $existingRemote = git remote get-url origin 2>$null
+
 if ($existingRemote) {
+    Write-Host "✓ Remote ya configurado: $existingRemote" -ForegroundColor Green
     git remote set-url origin $REMOTE_URL
 } else {
+    Write-Host ""
+    Write-Host "► Creando repositorio en GitHub..." -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "  Abrí esta URL en tu navegador para crear el repo:" -ForegroundColor White
+    Write-Host "  https://github.com/new" -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "  Configuración recomendada:" -ForegroundColor White
+    Write-Host "  • Repository name: $REPO_NAME" -ForegroundColor Gray
+    Write-Host "  • Visibility: Public" -ForegroundColor Gray
+    Write-Host "  • NO tildes 'Add README', 'Add .gitignore' ni 'Choose license'" -ForegroundColor Gray
+    Write-Host ""
+    Read-Host "  Cuando lo hayas creado, presioná ENTER para continuar"
+
+    Write-Host "► Conectando con GitHub ($REMOTE_URL)..." -ForegroundColor Yellow
     git remote add origin $REMOTE_URL
 }
 
-# 6. Push
+# 5. Push — si falla, no mostrar el cartel de éxito
 Write-Host "► Subiendo archivos a GitHub..." -ForegroundColor Yellow
 git push -u origin $BRANCH
+if ($LASTEXITCODE -ne 0) {
+    Write-Host ""
+    Write-Host "✗ El push falló. Revisá el error de arriba." -ForegroundColor Red
+    exit 1
+}
 
 Write-Host ""
 Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Green
