@@ -1,0 +1,7 @@
+# Config local de MCP (Supabase) — no va al repo, que es público
+.mcp.json
+.claude/settings.local.json
+
+# Basura de Windows que "git add ." levantaría sin querer
+Thumbs.db
+desktop.ini
