@@ -1,0 +1,140 @@
+{
+  "name": "Distritecno CRM - Webhook Contactos",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "crm-contacto",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook - Nuevo Contacto",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [240, 300],
+      "webhookId": "distritecno-crm-contacto"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\n\nconst nombre = body.nombre || '';\nconst tel = body.tel || '';\nconst canal = body.canal || 'WhatsApp';\nconst status = body.status || 'lead';\nconst interes = body.interes || '';\nconst notas = body.notas || '';\nconst fecha = new Date().toLocaleDateString('es-AR', { day: '2-digit', month: 'short', year: 'numeric' });\n\nif (!nombre) {\n  throw new Error('El campo nombre es obligatorio');\n}\n\nreturn [{\n  json: {\n    nombre,\n    tel,\n    canal,\n    status,\n    interes,\n    notas,\n    fecha,\n    monto: body.monto || '',\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "validate-data",
+      "name": "Validar y limpiar datos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "TU_SPREADSHEET_ID_ACA",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Contactos",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nombre": "={{ $json.nombre }}",
+            "Teléfono": "={{ $json.tel }}",
+            "Canal": "={{ $json.canal }}",
+            "Estado": "={{ $json.status }}",
+            "Interés": "={{ $json.interes }}",
+            "Notas": "={{ $json.notas }}",
+            "Monto": "={{ $json.monto }}",
+            "Fecha": "={{ $json.fecha }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "sheets-append",
+      "name": "Guardar en Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ ok: true, mensaje: 'Contacto guardado correctamente', nombre: $('Validar y limpiar datos').first().json.nombre }) }}",
+        "options": {}
+      },
+      "id": "respond-ok",
+      "name": "Responder OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [900, 220]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ ok: false, error: $execution.error?.message || 'Error desconocido' }) }}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "respond-error",
+      "name": "Responder Error",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [900, 400]
+    },
+    {
+      "parameters": {
+        "content": "## CRM Distritecno - Endpoint de contactos\n\n**Webhook URL (producción):**\n`POST /webhook/crm-contacto`\n\n**Body esperado (JSON):**\n```json\n{\n  \"nombre\": \"Carlos Méndez\",\n  \"tel\": \"+549 11 1234-5678\",\n  \"canal\": \"WhatsApp\",\n  \"status\": \"lead\",\n  \"interes\": \"Samsung A55\",\n  \"notas\": \"Consultó por precio\",\n  \"monto\": 85000\n}\n```\n\n**Importante:** Reemplazá `TU_SPREADSHEET_ID_ACA` en el nodo de Sheets con el ID real de tu planilla.",
+        "height": 320,
+        "width": 380
+      },
+      "id": "sticky-note",
+      "name": "Instrucciones",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [240, 500]
+    }
+  ],
+  "connections": {
+    "Webhook - Nuevo Contacto": {
+      "main": [
+        [
+          {
+            "node": "Validar y limpiar datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar y limpiar datos": {
+      "main": [
+        [
+          {
+            "node": "Guardar en Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar en Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Responder OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": ["crm", "distritecno", "contactos"]
+}
