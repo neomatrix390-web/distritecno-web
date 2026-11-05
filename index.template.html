@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DISTRITECNO - Tecnología y electrodomésticos al mejor precio. Envíos a todo el país. Productos nuevos con garantía.">
+  <meta name="keywords" content="distritecno, electrodomésticos, tecnología, celulares, televisores, freidoras, computación, Argentina">
+  <meta name="author" content="DISTRITECNO">
+  <meta property="og:title" content="DISTRITECNO - Tecnología y Electrodomésticos">
+  <meta property="og:description" content="Los mejores productos de tecnología y electrodomésticos al mejor precio. Envíos a todo el país.">
+  <meta property="og:type" content="website">
+  <title>DISTRITECNO - Tecnología y Electrodomésticos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header id="header" class="header">
+    <div class="container header__inner">
+      <a href="#" class="logo" aria-label="DISTRITECNO - Inicio">
+        <span class="logo__icon"><i class="fas fa-bolt"></i></span>
+        <span class="logo__text">DISTRI<span class="logo__accent">TECNO</span></span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <ul class="nav__list">
+          <li><a href="#inicio" class="nav__link">Inicio</a></li>
+          <li><a href="#productos" class="nav__link">Productos</a></li>
+          <li><a href="#categorias" class="nav__link">Categorías</a></li>
+          <li><a href="#nosotros" class="nav__link">Nosotros</a></li>
+          <li><a href="#contacto" class="nav__link nav__link--cta">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="cart-icon" id="cartIcon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section id="inicio" class="hero">
+  <div class="hero__bg-image" style="position:absolute;inset:0;z-index:0;opacity:0.15;background:url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920&h=1080&fit=crop') center/cover no-repeat;filter:blur(2px);"></div>
+    <div class="hero__bg">
+      <div class="hero__orb hero__orb--1"></div>
+      <div class="hero__orb hero__orb--2"></div>
+      <div class="hero__grid"></div>
+    </div>
+    <div class="container hero__content">
+      <div class="hero__badge">
+        <span class="hero__badge-dot"></span>
+        Tecnología y electrodomésticos
+      </div>
+      <h1 class="hero__title">
+        Los mejores productos<br>
+        <span class="hero__title-gradient">al mejor precio</span>
+      </h1>
+      <p class="hero__description">
+        Tecnología, electrodomésticos y más. Productos nuevos con garantía, 
+        envíos a todo el país y atención personalizada.
+      </p>
+      <div class="hero__actions">
+        <a href="#productos" class="btn btn--primary">
+          <span>Ver productos</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+        <a href="#contacto" class="btn btn--ghost">
+          <i class="fas fa-whatsapp"></i>
+          <span>Consultar por WhatsApp</span>
+        </a>
+      </div>
+      <div class="hero__stats">
+        <div class="hero__stat">
+          <span class="hero__stat-number" data-count="67">0</span>
+          <span class="hero__stat-label">Productos disponibles</span>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-number" data-count="100">0</span><span class="hero__stat-suffix">%</span>
+          <span class="hero__stat-label">Productos nuevos</span>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-number" data-count="24">0</span><span class="hero__stat-suffix">hs</span>
+          <span class="hero__stat-label">Envío express</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== CATEGORÍAS ===== -->
+  <section id="categorias" class="categories">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Categorías</span>
+        <h2 class="section-title">Explora nuestro catálogo</h2>
+        <p class="section-subtitle">Encuentra lo que buscas entre nuestras categorías de productos.</p>
+      </div>
+      <div class="categories__grid">
+        <a href="#productos" class="category-card" data-cat="tv">
+          <div class="category-card__icon"><i class="fas fa-tv"></i></div>
+          <h3>Televisores</h3>
+          <span class="category-card__count">Smart TV, 4K, QLED</span>
+        </a>
+        <a href="#productos" class="category-card" data-cat="celulares">
+          <div class="category-card__icon"><i class="fas fa-mobile-alt"></i></div>
+          <h3>Celulares</h3>
+          <span class="category-card__count">Xiaomi, Samsung, Motorola</span>
+        </a>
+        <a href="#productos" class="category-card" data-cat="electro">
+          <div class="category-card__icon"><i class="fas fa-blender"></i></div>
+          <h3>Electrodomésticos</h3>
+          <span class="category-card__count">Freidoras, licuadoras, tostadoras</span>
+        </a>
+        <a href="#productos" class="category-card" data-cat="computacion">
+          <div class="category-card__icon"><i class="fas fa-laptop"></i></div>
+          <h3>Computación</h3>
+          <span class="category-card__count">Notebooks, tablets, accesorios</span>
+        </a>
+        <a href="#productos" class="category-card" data-cat="clima">
+          <div class="category-card__icon"><i class="fas fa-wind"></i></div>
+          <h3>Climatización</h3>
+          <span class="category-card__count">Aires acondicionados, ventiladores</span>
+        </a>
+        <a href="#productos" class="category-card" data-cat="hogar">
+          <div class="category-card__icon"><i class="fas fa-couch"></i></div>
+          <h3>Hogar</h3>
+          <span class="category-card__count">Colchones, muebles, decoración</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRODUCTOS ===== -->
+  <section id="productos" class="products">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Catálogo</span>
+        <h2 class="section-title">Productos destacados</h2>
+        <p class="section-subtitle">Los mejores productos de tecnología y electrodomésticos.</p>
+      </div>
+      <div class="products__filter">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="Perfumes">Perfumes</button>
+        <button class="filter-btn" data-filter="Herramientas">Herramientas</button>
+        <button class="filter-btn" data-filter="Hogar">Hogar</button>
+        <button class="filter-btn" data-filter="Tecnología">Tecnología</button>
+        <button class="filter-btn" data-filter="Belleza">Belleza</button>
+        <button class="filter-btn" data-filter="Mascotas">Mascotas</button>
+        <button class="filter-btn" data-filter="Deportes">Deportes</button>
+        <button class="filter-btn" data-filter="Varios">Varios</button>
+      </div>
+      <div class="products__grid" id="productsGrid">
+      <!-- Productos: se inyectan en build-web.js -->
+    </div>
+      <div class="products__load-more">
+        <button class="btn btn--ghost" id="loadMoreBtn">
+          <span>Ver más productos</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SOBRE NOSOTROS ===== -->
+  <section id="nosotros" class="about">
+    <div class="container about__inner">
+      <div class="about__image" data-animate>
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&h=500&fit=crop" alt="DISTRITECNO - Tienda" loading="lazy">
+        <div class="about__image-badge">
+          <span class="about__image-badge-number">100%</span>
+          <span class="about__image-badge-text">Productos nuevos</span>
+        </div>
+      </div>
+      <div class="about__content" data-animate>
+        <span class="section-tag">Sobre nosotros</span>
+        <h2 class="section-title">Tu tienda de tecnología y electrodomésticos</h2>
+        <p class="about__text">
+          En DISTRITECNO nos especializamos en ofrecer los mejores productos de tecnología 
+          y electrodomésticos al mejor precio del mercado. Trabajamos con las marcas más 
+          reconocidas y garantizamos la calidad de cada producto.
+        </p>
+        <p class="about__text">
+          Nuestro compromiso es brindarte una experiencia de compra segura, rápida y 
+          satisfactoria. Enviamos a todo el país y ofrecemos atención personalizada 
+          por WhatsApp.
+        </p>
+        <div class="about__features">
+          <div class="about__feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Productos 100% nuevos</span>
+          </div>
+          <div class="about__feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Garantía en todos los productos</span>
+          </div>
+          <div class="about__feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Envíos a todo el país</span>
+          </div>
+          <div class="about__feature">
+            <i class="fas fa-check-circle"></i>
+            <span>Atención por WhatsApp</span>
+          </div>
+        </div>
+        <a href="#contacto" class="btn btn--primary">
+          <span>Contáctanos</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIOS ===== -->
+  <section id="testimonios" class="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Testimonios</span>
+        <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+        <p class="section-subtitle">La satisfacción de nuestros clientes es nuestra mayor recompensa.</p>
+      </div>
+      <div class="testimonials__slider" id="testimonialsSlider">
+        <div class="testimonial-card active" data-index="0">
+          <div class="testimonial-card__quote"><i class="fas fa-quote-left"></i></div>
+          <p class="testimonial-card__text">
+            "Excelente atención y productos de calidad. El envío fue rápido y todo llegó en perfecto estado. 
+            Muy recomendable."
+          </p>
+          <div class="testimonial-card__author">
+            <img src="https://i.pravatar.cc/80?img=33" alt="Cliente" loading="lazy">
+            <div>
+              <h4>María García</h4>
+              <span>Cliente verificada</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-index="1">
+          <div class="testimonial-card__quote"><i class="fas fa-quote-left"></i></div>
+          <p class="testimonial-card__text">
+            "Compré un televisor y una freidora. Los precios son los mejores que encontré. 
+            La atención por WhatsApp es inmediata."
+          </p>
+          <div class="testimonial-card__author">
+            <img src="https://i.pravatar.cc/80?img=12" alt="Cliente" loading="lazy">
+            <div>
+              <h4>Carlos Rodríguez</h4>
+              <span>Cliente verificado</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-index="2">
+          <div class="testimonial-card__quote"><i class="fas fa-quote-left"></i></div>
+          <p class="testimonial-card__text">
+            "DISTRITECNO es mi tienda de confianza. Siempre tienen stock y los productos son originales. 
+            100% recomendable."
+          </p>
+          <div class="testimonial-card__author">
+            <img src="https://i.pravatar.cc/80?img=47" alt="Cliente" loading="lazy">
+            <div>
+              <h4>Ana Martínez</h4>
+              <span>Cliente verificada</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonials__dots" id="testimonialDots">
+        <button class="dot active" data-index="0" aria-label="Testimonio 1"></button>
+        <button class="dot" data-index="1" aria-label="Testimonio 2"></button>
+        <button class="dot" data-index="2" aria-label="Testimonio 3"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACTO ===== -->
+  <section id="contacto" class="contact">
+    <div class="container contact__inner">
+      <div class="contact__info" data-animate>
+        <span class="section-tag">Contacto</span>
+        <h2 class="section-title">¿Tenés alguna consulta?</h2>
+        <p class="contact__text">
+          Escribinos por WhatsApp o completá el formulario y te responderemos a la brevedad.
+        </p>
+        <div class="contact__details">
+          <div class="contact__detail">
+            <i class="fab fa-whatsapp"></i>
+            <span>+54 9 11 XXXX-XXXX</span>
+          </div>
+          <div class="contact__detail">
+            <i class="fas fa-envelope"></i>
+            <span>info@distritecno.com</span>
+          </div>
+          <div class="contact__detail">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Buenos Aires, Argentina</span>
+          </div>
+        </div>
+        <div class="contact__social">
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <form class="contact__form" id="contactForm" data-animate>
+        <div class="form__group">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+        </div>
+        <div class="form__group">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+        </div>
+        <div class="form__group">
+          <label for="telefono">Teléfono / WhatsApp</label>
+          <input type="tel" id="telefono" name="telefono" placeholder="+54 9 11 XXXX-XXXX">
+        </div>
+        <div class="form__group">
+          <label for="producto">Producto de interés</label>
+          <select id="producto" name="producto">
+            <option value="">Selecciona un producto</option>
+            <option value="tv">Televisores</option>
+            <option value="celular">Celulares</option>
+            <option value="electro">Electrodomésticos</option>
+            <option value="computacion">Computación</option>
+            <option value="clima">Climatización</option>
+            <option value="hogar">Hogar</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div class="form__group">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="5" placeholder="Cuéntanos qué necesitas..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full">
+          <span>Enviar consulta</span>
+          <i class="fas fa-paper-plane"></i>
+        </button>
+        <div class="form__success" id="formSuccess">
+          <i class="fas fa-check-circle"></i>
+          <span>¡Consulta enviada! Te responderemos pronto.</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="#" class="logo">
+            <span class="logo__icon"><i class="fas fa-bolt"></i></span>
+            <span class="logo__text">DISTRI<span class="logo__accent">TECNO</span></span>
+          </a>
+          <p class="footer__brand-desc">
+            Tecnología y electrodomésticos al mejor precio. Productos nuevos con garantía. 
+            Envíos a todo el país.
+          </p>
+        </div>
+        <div class="footer__links">
+          <div class="footer__col">
+            <h4>Productos</h4>
+            <ul>
+              <li><a href="#productos">Televisores</a></li>
+              <li><a href="#productos">Celulares</a></li>
+              <li><a href="#productos">Electrodomésticos</a></li>
+              <li><a href="#productos">Computación</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4>Empresa</h4>
+            <ul>
+              <li><a href="#nosotros">Sobre nosotros</a></li>
+              <li><a href="#productos">Catálogo</a></li>
+              <li><a href="#testimonios">Testimonios</a></li>
+              <li><a href="#contacto">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4>Contacto</h4>
+            <ul>
+              <li><a href="#">WhatsApp</a></li>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">Facebook</a></li>
+              <li><a href="#">Email</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2025 DISTRITECNO. Todos los derechos reservados.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scrollTop" class="scroll-top" aria-label="Volver arriba">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  
+    <script src="products-data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

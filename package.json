@@ -1,0 +1,13 @@
+{
+  "name": "distritecno-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DISTRITECNO - Tienda online (sitio estatico + checkout MercadoPago)",
+  "main": "index.html",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
