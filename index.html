@@ -5328,5 +5328,92 @@ setTimeout(addCartButtons, 1000);</script>
     </div>
   </div>
 
+  <!-- Lead Magnet - Captura WhatsApp -->
+  <div id="lead-magnet" class="lead-magnet" style="display:none;">
+    <div class="lead-magnet__overlay"></div>
+    <div class="lead-magnet__modal">
+      <button class="lead-magnet__close" aria-label="Cerrar">✕</button>
+      <div class="lead-magnet__icon">🎁</div>
+      <h3>¿Querés el catálogo mayorista?</h3>
+      <p>Dejanos tu WhatsApp y te enviamos:<br>
+      ✅ Catálogo completo con precios<br>
+      ✅ Top 5 fragancias para arrancar<br>
+      ✅ Envío gratis en tu 1er pedido >$50k</p>
+      <form id="lead-form">
+        <input type="hidden" name="source" value="web_popup">
+        <input type="hidden" name="utm_source" value="web">
+        <input type="hidden" name="utm_medium" value="organic">
+        <input type="hidden" name="utm_campaign" value="lead_magnet_2026">
+        <input type="tel" name="phone" placeholder="Tu WhatsApp (ej: 11 1234-5678)" required>
+        <input type="text" name="name" placeholder="Tu nombre (opcional)">
+        <button type="submit">Quiero mi catálogo 📲</button>
+      </form>
+      <p class="lead-magnet__disclaimer">Sin spam. Solo info útil para revendedores.</p>
+    </div>
+  </div>
+
+  <style>
+  .lead-magnet__overlay { position:fixed; inset:0; background:rgba(0,0,0,.8); backdrop-filter:blur(4px); z-index:9999; }
+  .lead-magnet__modal { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:10000; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-xl); padding:32px; max-width:400px; width:90%; text-align:center; box-shadow:var(--glow-cyan); animation:popIn .3s ease; }
+  @keyframes popIn { from { opacity:0; transform:translate(-50%,-50%) scale(.9); } to { opacity:1; transform:translate(-50%,-50%) scale(1); } }
+  .lead-magnet__close { position:absolute; top:12px; right:12px; width:32px; height:32px; border-radius:50%; background:var(--bg-glass); border:1px solid var(--border); color:var(--text-muted); cursor:pointer; font-size:1rem; }
+  .lead-magnet__icon { font-size:3rem; margin-bottom:16px; }
+  .lead-magnet__modal h3 { font-family:var(--font-display); font-size:1.5rem; margin-bottom:12px; }
+  .lead-magnet__modal p { color:var(--text-muted); margin-bottom:20px; line-height:1.6; }
+  .lead-magnet__modal form { display:flex; flex-direction:column; gap:12px; }
+  .lead-magnet__modal input { padding:14px 16px; background:rgba(0,0,0,.3); border:1px solid var(--border); border-radius:12px; color:var(--text); font-size:.95rem; }
+  .lead-magnet__modal input:focus { border-color:var(--neon-cyan); box-shadow:0 0 0 3px rgba(0,245,255,.15); outline:none; }
+  .lead-magnet__modal button { padding:14px; background:linear-gradient(135deg,var(--neon-cyan),var(--neon-magenta)); color:#000; font-weight:700; border:none; border-radius:9999px; cursor:pointer; }
+  .lead-magnet__disclaimer { font-size:.75rem; color:var(--text-muted); margin-top:16px; }
+  </style>
+
+  <script>
+  (function() {
+    const modal = document.getElementById('lead-magnet');
+    const form = document.getElementById('lead-form');
+    const closeBtn = modal.querySelector('.lead-magnet__close');
+    
+    // Mostrar al 60% scroll o 30s
+    let shown = false;
+    function show() {
+      if (shown) return;
+      shown = true;
+      modal.style.display = 'block';
+    }
+    
+    window.addEventListener('scroll', () => {
+      const scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      if (scrollPct > 0.6) show();
+    });
+    setTimeout(show, 30000);
+    
+    closeBtn.addEventListener('click', () => modal.style.display = 'none');
+    modal.querySelector('.lead-magnet__overlay').addEventListener('click', () => modal.style.display = 'none');
+    
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      const btn = form.querySelector('button');
+      btn.disabled = true; btn.textContent = 'Enviando...';
+      
+      try {
+        const res = await fetch('https://distritecnoayg.duckdns.org/webhook/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const json = await res.json();
+        if (json.ok) {
+          form.innerHTML = '<p style="color:var(--neon-lime);">✅ ¡Listo! Te escribimos a WhatsApp en segundos.</p>';
+          setTimeout(() => modal.style.display = 'none', 3000);
+        } else throw new Error(json.error);
+      } catch (err) {
+        btn.disabled = false; btn.textContent = 'Quiero mi catálogo 📲';
+        alert('Error: ' + err.message);
+      }
+    });
+  })();
+  </script>
+
 </body>
 </html>
