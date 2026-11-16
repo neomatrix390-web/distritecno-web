@@ -5397,7 +5397,7 @@ setTimeout(addCartButtons, 1000);</script>
       btn.disabled = true; btn.textContent = 'Enviando...';
       
       try {
-        const res = await fetch('https://distritecnoayg.duckdns.org/webhook/lead', {
+        const res = await fetch('https://distritecnoayg.duckdns.org/webhook/lead-capture-v2', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
