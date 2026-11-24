@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "buildCommand": "npm install",
+  "devCommand": "vercel dev",
+  "installCommand": "npm install",
+  "framework": null,
+  "regions": ["iad1"],
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 60,
+      "memory": 1024
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, x-puente-token" }
+      ]
+    }
+  ],
+  "rewrites": [
+    { "source": "/api/tk-video", "destination": "/api/tk-video" },
+    { "source": "/api/create-preference", "destination": "/api/create-preference" }
+  ]
+}

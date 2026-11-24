@@ -2,12 +2,17 @@
   "name": "distritecno-web",
   "version": "1.0.0",
   "private": true,
-  "description": "DISTRITECNO - Tienda online (sitio estatico + checkout MercadoPago)",
+  "description": "DISTRITECNO - Tienda online + Omega Perfumes API (TikTok video proxy)",
   "main": "index.html",
   "scripts": {
-    "start": "vercel dev"
+    "start": "vercel dev",
+    "deploy": "vercel --prod"
   },
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "@vercel/blob": "^0.23.0",
+    "@aws-sdk/client-s3": "^3.490.0"
   }
 }
